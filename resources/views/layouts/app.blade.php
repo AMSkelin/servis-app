@@ -18,16 +18,16 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/countries">Countries</a>
+      <a class="nav-item nav-link active" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="{{ route('countries.index') }}">Countries</a>
       <a class="nav-item nav-link" href="/users">Users</a>
-      <a class="nav-item nav-link" href="/devices">Devices</a>
-      <a class="nav-item nav-link" href="/device_models">Device models</a>
-      <a class="nav-item nav-link" href="/device_types">Device types</a>
-      <a class="nav-item nav-link" href="/parts">Parts</a>
-      <a class="nav-item nav-link" href="/repairs">Repairs</a>
-      <a class="nav-item nav-link" href="/suppliers">Suppliers</a>
-      <a class="nav-item nav-link" href="/bills">Bills</a>
+      <a class="nav-item nav-link" href="{{ route('devices.index') }}">Devices</a>
+      <a class="nav-item nav-link" href="{{ route('device_models.index') }}">Device models</a>
+      <a class="nav-item nav-link" href="{{ route('device_types.index') }}">Device types</a>
+      <a class="nav-item nav-link" href="{{ route('parts.index') }}">Parts</a>
+      <a class="nav-item nav-link" href="{{ route('repairs.index') }}">Repairs</a>
+      <a class="nav-item nav-link" href="{{ route('suppliers.index') }}">Suppliers</a>
+      <a class="nav-item nav-link" href="{{ route('bills.index') }}">Bills</a>
     </div>
   </div>
 </nav>
