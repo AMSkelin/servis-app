@@ -3,7 +3,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <table class="table table-striped">
+  <table class="table table-striped mt-3">
+  <a href="{{ route('device_types.create') }}" class="btn btn-primary mt-5">Add</a>
     <thead>
       <tr>
         <th scope="col">Id</th>
@@ -15,6 +16,10 @@
           <tr>
               <td>{{ $device_type->id }}</td>
               <td>{{ $device_type->name }}</td>
+              <td>
+                <a class="btn btn-outline-primary" href="{{ route('device_types.show', ['device_type' => $device_type->id]) }}">Details</a>
+                <a class="btn btn-outline-primary" href="{{ route('device_types.edit', ['device_type' => $device_type->id]) }}">Edit</a>
+              </td>
          </tr>
       @endforeach
       </tr>

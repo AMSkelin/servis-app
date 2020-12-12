@@ -48,7 +48,7 @@ class Device_typeController extends Controller
     public function show($id)
     {
         $device_type = Device_type::findOrFail($id);
-        dd($device_type);
+        return view('device_types.show', compact('device_type'));
     }
 
     /**

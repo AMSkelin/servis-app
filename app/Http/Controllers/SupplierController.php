@@ -48,7 +48,7 @@ class SupplierController extends Controller
     public function show($id)
     {
         $supplier = Supplier::findOrFail($id);
-        dd($supplier);
+        return view('suppliers.show', compact('supplier'));
     }
 
     /**

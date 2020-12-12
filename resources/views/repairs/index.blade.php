@@ -3,12 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
-  <table class="table table-striped">
+<a href="{{ route('repairs.create') }}" class="btn btn-primary mt-5">Add</a>
+  <table class="table table-striped mt-3">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
-        <th scope="col">Note</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +16,10 @@
           <tr>
               <td>{{ $repair->id }}</td>
               <td>{{ $repair->name }}</td>
-              <td>{{ $repair->note }}</td>
+              <td>
+                <a class="btn btn-outline-primary" href="{{ route('repairs.show', ['repair' => $repair->id]) }}">Details</a>
+                <a class="btn btn-outline-primary" href="{{ route('repairs.edit', ['repair' => $repair->id]) }}">Edit</a>
+              </td>
           </tr>
       @endforeach
       </tr>

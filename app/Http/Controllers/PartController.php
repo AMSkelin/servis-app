@@ -48,7 +48,7 @@ class PartController extends Controller
     public function show($id)
     {
         $part = Part::findOrFail($id);
-        dd($part);
+        return view('parts.show', compact('part'));
         
     }
 

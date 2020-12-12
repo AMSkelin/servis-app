@@ -48,7 +48,7 @@ class RepairController extends Controller
     public function show($id)
     {
         $repair = Repair::findOrFail($id);
-        dd($repair);
+        return view('repairs.show', compact('repair'));
     }
 
     /**
