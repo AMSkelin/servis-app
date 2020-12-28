@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Device_model;
 use Illuminate\Http\Request;
+use App\User;
 
-class Device_modelController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class Device_modelController extends Controller
      */
     public function index()
     {
-        $device_models = Device_model::paginate();
-        return view('device_models.index', ['device_models'=> $device_models]);
+        $users = User::with(['country'])->paginate();
+        return view('users.index', compact('users')); 
     }
-   
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,8 +47,8 @@ class Device_modelController extends Controller
      */
     public function show($id)
     {
-        $device_model = Device_model::findOrFail($id);
-        return view('device_models.show', compact('device_model'));
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
     }
 
     /**

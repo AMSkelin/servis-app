@@ -9,4 +9,7 @@ class Part extends Model
     protected $fillable = [
         'name' 
     ];
+
+    public function supplier() { 
+        return $this->belongsTo(Supplier::class); }
 }

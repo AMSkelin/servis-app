@@ -21,7 +21,7 @@ class BillSeeder extends Seeder
             'total_amount' => 5678,
             'billed_at' => carbon::now(),
             'publisher' => 'Ana Anić',
-            'billing number' => 55,
+            'billing number' => '55',
             'billing_address' => 'Ulica sv. Petra'
             
         ]);

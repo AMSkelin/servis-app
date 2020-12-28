@@ -14,10 +14,11 @@ class PartController extends Controller
      */
     public function index()
     {
-        $part = Part::paginate();
+        $part = Part::with(['supplier'])->paginate();
         return view('parts.index', ['parts'=> $part]);
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *

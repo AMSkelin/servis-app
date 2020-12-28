@@ -26,3 +26,4 @@ Route::resource('devices', DeviceController::class);
 Route::resource('parts', PartController::class);
 Route::resource('repairs', RepairController::class);
 Route::resource('suppliers', SupplierController::class);
+Route::resource('users', UserController::class);

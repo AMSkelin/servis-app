@@ -14,10 +14,11 @@ class RepairController extends Controller
      */
     public function index()
     {
-        $repair = Repair::paginate();
-        return view('repairs.index', ['repairs'=> $repair]);
+        $repairs = Repair::with(['bill'])->paginate();
+        return view('repairs.index', compact('repairs'));
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *

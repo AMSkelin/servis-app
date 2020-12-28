@@ -9,4 +9,6 @@ class Device extends Model
     protected $fillable = [
         'name' 
     ];
+
+    
 }

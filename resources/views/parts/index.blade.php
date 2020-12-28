@@ -9,6 +9,7 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th scope="col">Supplier</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,7 @@
           <tr>
               <td>{{ $part->id }}</td>
               <td>{{ $part->name }}</td>
+              <td>{{ $part->supplier->name }}</td>
               <td>
                 <a class="btn btn-outline-primary" href="{{ route('parts.show', ['part' => $part->id]) }}">Details</a>
                 <a class="btn btn-outline-primary" href="{{ route('parts.edit', ['part' => $part->id]) }}">Edit</a>

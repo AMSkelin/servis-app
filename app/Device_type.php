@@ -9,4 +9,6 @@ class Device_type extends Model
     protected $fillable = [
         'name' 
     ];
+
+   
 }
