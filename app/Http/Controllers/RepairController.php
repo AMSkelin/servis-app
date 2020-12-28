@@ -14,8 +14,8 @@ class RepairController extends Controller
      */
     public function index()
     {
-        $repairs = Repair::with(['bill'])->paginate();
-        return view('repairs.index', compact('repairs'));
+        $repair = Repair::paginate();
+        return view('repairs.index', ['repairs'=> $repair]); 
     }
 
     
