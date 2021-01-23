@@ -4,6 +4,12 @@
 
 @section('content')
   <a href="{{ route('countries.create') }}" class="btn btn-primary mt-5">Add</a>
+  
+  <form class="form-inline float-right mt-5" method="GET" action="{{ route('countries.index') }}">
+    <input class="form-control" type="text" placeholder="Search" name="search">
+  </form>
+  
+  
   <table class="table table-striped mt-3">
     <thead>
       <tr>

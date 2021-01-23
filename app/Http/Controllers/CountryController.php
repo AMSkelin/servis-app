@@ -28,7 +28,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('countries.create');
     }
 
     /**
@@ -39,7 +39,12 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:countries|max:255',
+            'native_name' => 'required|unique:countries|max:255',
+        ]);
+        $country = Country::create($validated);
+        return view('countries.show', compact('country'));
     }
 
     /**
@@ -62,7 +67,8 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $country = Country::findOrFail($id);
+        return view('countries.edit', compact('country'));
     }
 
     /**
@@ -74,7 +80,16 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'native_name' => 'required|max:255',
+        ]);
+
+        $country = Country::findOrFail($id);
+        $country->fill($validated);
+        $country->save();
+
+        return view('countries.show', compact('country'));
     }
 
     /**
@@ -85,6 +100,7 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Country::destroy($id);
+        return redirect()->route('countries.index');
     }
 }

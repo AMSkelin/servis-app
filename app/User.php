@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Country;
 
 class User extends Authenticatable
 {
@@ -16,8 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 
+        'first_name', 
+        'last_name', 
         'email', 
+        'country_id',
         'password'
     ];
 
@@ -35,6 +38,10 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
+    public function device() { 
+        return $this->hasMany(Device::class); 
+    }
+ 
 
     /**
      * The attributes that should be cast to native types.

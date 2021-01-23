@@ -15,5 +15,8 @@ class Bill extends Model
         'billing_address'
 
     ];
+
+    public function repair() { 
+        return $this->hasMany(Repair::class); }
     
 }

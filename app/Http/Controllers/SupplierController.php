@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Supplier;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('suppliers.create');
     }
 
     /**
@@ -36,7 +37,12 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:suppliers|max:255'
+            
+        ]);
+        $supplier = Supplier::create($validated);
+        return view('suppliers.show', compact('supplier'));
     }
 
     /**
@@ -59,7 +65,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = Supplier::findOrFail($id);
+        return view('suppliers.edit', compact('supplier'));
     }
 
     /**
@@ -71,7 +78,16 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            
+        ]);
+
+        $supplier = Supplier::findOrFail($id);
+        $supplier->fill($validated);
+        $supplier->save();
+
+        return view('suppliers.show', compact('supplier'));
     }
 
     /**
@@ -82,6 +98,7 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Supplier::destroy($id);
+        return redirect()->route('suppliers.index');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Part;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class PartController extends Controller
@@ -26,7 +27,7 @@ class PartController extends Controller
      */
     public function create()
     {
-        //
+        return view('parts.create');
     }
 
     /**
@@ -37,7 +38,15 @@ class PartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        
+            'name' => 'required',
+            'name' => 'required',
+       
+        ]);
+
+        $part = Part::create($validated);
+        return view('parts.show', compact('part'));
     }
 
     /**
@@ -61,7 +70,13 @@ class PartController extends Controller
      */
     public function edit($id)
     {
-        //
+        $part = Part::findOrFail($id);
+
+        $suppliers = Supplier::pluck('name', 'id');
+
+        return view('parts.edit',
+            compact('part', 'suppliers')
+        );
     }
 
     /**
@@ -73,7 +88,17 @@ class PartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'name' => 'required',
+            
+        ]);
+
+        $part = Part::findOrFail($id);
+        $part->fill($validated);
+        $part->save();
+
+        return redirect()->route('parts.show', ['part' => $part->id]);
     }
 
     /**
@@ -84,6 +109,7 @@ class PartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Part::destroy($id);
+        return redirect()->route('parts.index');
     }
 }

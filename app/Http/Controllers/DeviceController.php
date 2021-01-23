@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Device;
+use App\Device_model;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -14,7 +15,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        $device = Device::paginate();
+        $device = Device::with(['user'])->paginate();
         return view('devices.index', ['devices'=> $device]);
     }
 
