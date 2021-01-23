@@ -15,7 +15,7 @@ class Device_modelController extends Controller
      */
     public function index()
     {
-        $device_model = Device_model::with(['device_type'])->paginate();
+        $device_models = Device_model::with(['device_type'])->paginate();
         return view('device_models.index', compact('device_models'));
        
     }
