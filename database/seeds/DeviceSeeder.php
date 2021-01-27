@@ -15,7 +15,7 @@ class DeviceSeeder extends Seeder
     {
         DB::table('devices')->insert([
             'name' => Str::random(10),
-            'device_models_id'=>'1',
+            'device_model_id'=>'1',
             'user_id'=>'1'
         ]);
     }      

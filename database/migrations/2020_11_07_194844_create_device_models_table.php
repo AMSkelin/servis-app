@@ -18,7 +18,7 @@ class CreateDeviceModelsTable extends Migration
             $table->string('name', 50);
             $table->timestamps();
             
-            $table->foreignId('device_types_id')->constrained();
+            $table->foreignId('device_type_id')->constrained();
             
         });
     }

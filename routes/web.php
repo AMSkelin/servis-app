@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
+
+
+Route::middleware(['auth'])->group(function () {
+
+    /* homepage, primjetiti ->name('home') na kraju */
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('home');
 
 Route::resource('countries', CountryController::class);
 Route::resource('bills', BillController::class);
@@ -27,3 +35,9 @@ Route::resource('parts', PartController::class);
 Route::resource('repairs', RepairController::class);
 Route::resource('suppliers', SupplierController::class);
 Route::resource('users', UserController::class);
+
+});
+
+/* ovdje su rute za login, registraciju, change password, itd. */
+require __DIR__.'/auth.php';
+

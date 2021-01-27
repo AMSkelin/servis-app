@@ -9,6 +9,9 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th scope="col">Bill</th>
+        <th scope="col">Part</th>
+        <th scope="col">Device</th>
         
         
       </tr>
@@ -18,7 +21,10 @@
           <tr>
               <td>{{ $repair->id }}</td>
               <td>{{ $repair->name }}</td>
-              
+              <td>{{ $repair->bill->amount}}</td>
+              <td>{{ $repair->part->name }}</td>
+              <td>{{ $repair->device->name }}</td>
+            
               
               <td>
                 <a class="btn btn-outline-primary" href="{{ route('repairs.show', ['repair' => $repair->id]) }}">Details</a>

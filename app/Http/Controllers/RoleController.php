@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Device_model;
 use Illuminate\Http\Request;
-use App\Device_type;
+use App\Role;
 
-class Device_modelController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +14,10 @@ class Device_modelController extends Controller
      */
     public function index()
     {
-        $device_models = Device_model::with(['device_type'])->paginate();
-                
-        return view('device_models.index', compact('device_models'));
-       
+        $roles = Role::all();
+        dd($roles);
     }
-   
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +25,7 @@ class Device_modelController extends Controller
      */
     public function create()
     {
-        return view('device_models.create');
+        //
     }
 
     /**
@@ -39,13 +36,7 @@ class Device_modelController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'device_type_id'=> 'required'
-            
-        ]);
-        $device_model = Device_model::create($validated);
-        return view('device_models.show', compact('device_model'));
+        //
     }
 
     /**
@@ -56,8 +47,9 @@ class Device_modelController extends Controller
      */
     public function show($id)
     {
-        $device_model = Device_model::findOrFail($id);
-        return view('device_models.show', compact('device_model'));
+        // Country::where('id', '=', $id)->first();
+        $role = Role::findOrFail($id);
+        dd($role);
     }
 
     /**
@@ -68,10 +60,7 @@ class Device_modelController extends Controller
      */
     public function edit($id)
     {
-        $device_model = Device_model::findOrFail($id);
-
-        $device_types = Device_type::pluck('name', 'id');
-        return view('device_models.edit', compact('device_model', 'device_types'));
+        //
     }
 
     /**
@@ -83,17 +72,7 @@ class Device_modelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'device_type_id'=> 'required'
-            
-        ]);
-
-        $device_model = Device_model::findOrFail($id);
-        $device_model->fill($validated);
-        $device_model->save();
-
-        return view('device_models.show', compact('device_model'));
+        //
     }
 
     /**
@@ -104,7 +83,6 @@ class Device_modelController extends Controller
      */
     public function destroy($id)
     {
-        Device_model::destroy($id);
-        return redirect()->route('device_models.index');
+        //
     }
 }

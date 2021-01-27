@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::with(['country','device_model'])->paginate();
+        $users = User::with(['country'])->paginate();
         return view('users.index', compact('users'));
     }
 

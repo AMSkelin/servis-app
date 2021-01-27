@@ -16,10 +16,10 @@ class RepairSeeder extends Seeder
     {
         DB::table('repairs')->insert([
             'name' => Str::random(10),
-            'bills_id'=>'1',
+            'bill_id'=>'1',
             'note'=>Str::random(10),
-            'parts_id'=>'1',
-            'devices_id'=>'1',
+            'part_id'=>'1',
+            'device_id'=>'1',
             'repaired_at'=>carbon::now()
 
             ]);

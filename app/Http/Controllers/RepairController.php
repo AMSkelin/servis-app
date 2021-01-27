@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
+use App\Device;
+use App\Device_model;
+use App\Part;
 use App\Repair;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,7 @@ class RepairController extends Controller
      */
     public function index()
     {
-        $repair = Repair::paginate();
+        $repair = Repair::with('bill','device','part')->paginate();
         return view('repairs.index', ['repairs'=> $repair]); 
     }
 
@@ -26,7 +30,7 @@ class RepairController extends Controller
      */
     public function create()
     {
-        //
+        return view('repairs.create');
     }
 
     /**
@@ -37,7 +41,17 @@ class RepairController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'amount' => 'required',
+            'name' => 'required',
+            'name' => 'required',
+            
+          
+        ]);
+
+        $repair = Repair::create($validated);
+        return view('repairs.show', compact('repair'));
     }
 
     /**
@@ -60,7 +74,17 @@ class RepairController extends Controller
      */
     public function edit($id)
     {
-        //
+        $repair = Repair::findOrFail($id);
+
+        $bills = Bill::pluck('amount', 'id');
+
+        $parts = Part::pluck('name', 'id');
+
+        $devices = Device::pluck('name', 'id');
+
+        return view('repairs.edit',
+            compact('repair','bills', 'parts','devices')
+        );
     }
 
     /**
@@ -72,7 +96,19 @@ class RepairController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'bill_id' => 'required',
+            'part_id' => 'required',
+            'device_id' => 'required',
+            
+        ]);
+
+        $repair = Repair::findOrFail($id);
+        $repair->fill($validated);
+        $repair->save();
+
+        return redirect()->route('repairs.show', ['repair' => $repair->id]);
     }
 
     /**
@@ -83,6 +119,7 @@ class RepairController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Repair::destroy($id);
+        return redirect()->route('repairs.index');
     }
 }

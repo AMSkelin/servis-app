@@ -1,3 +1,9 @@
+@php
+
+$currentUser = \Auth::user();
+
+@endphp
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,40 +14,112 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Servis app</title>
   </head>
   <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Service application</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="{{ route('countries.index') }}">Countries</a>
-      <a class="nav-item nav-link" href="/users">Users</a>
-      <a class="nav-item nav-link" href="{{ route('devices.index') }}">Devices</a>
-      <a class="nav-item nav-link" href="{{ route('device_models.index') }}">Device models</a>
-      <a class="nav-item nav-link" href="{{ route('device_types.index') }}">Device types</a>
-      <a class="nav-item nav-link" href="{{ route('parts.index') }}">Parts</a>
-      <a class="nav-item nav-link" href="{{ route('repairs.index') }}">Repairs</a>
-      <a class="nav-item nav-link" href="{{ route('suppliers.index') }}">Suppliers</a>
-      <a class="nav-item nav-link" href="{{ route('bills.index') }}">Bills</a>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ route('home') }}">Servis app</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('countries.index') }}">Countries</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('device_types.index') }}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('device_models.index') }}">Messages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('devices.index') }}">Companies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('bills.index') }}">Companies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('repairs.index') }}">Companies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('parts.index') }}">Companies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('suppliers.index') }}">Companies</a>
+        </li>
+        </ul>
+        @auth
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="nav-user" role="button" data-toggle="dropdown">
+                Welcome {{ $currentUser->name }}<small> ({{ $currentUser->role->name }})</small>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ route('users.show', ['user' => $currentUser->id]) }}">My profile</a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="dropdown-item">Logout</button>
+                </form>
+            </div>
+            </li>
+        </ul>
+        @endauth
+
+        
     </div>
-  </div>
-</nav>
+    </nav>
 
     <div class="container">
-        @yield('content')
+
+        <!-- @if (session('success'))
+            <div class="alert alert-success mt-5">
+                {{ session('success') }}
+            </div>
+        @endif -->
+
+        
     </div>
 
+    <div class="container">
+    @yield('content')
+    </div>
 
- 
+    <style>
+        /* temporarily here */
+        body { padding-bottom: 10vh; }
+        footer {
+            left: 0;
+            bottom: 0;
+            height: 8vh;
+            z-index: 100;
+        }
+    </style>
+
+    <script>
+        /* temporarily here */
+        function areYouSure(ev) {
+            if(confirm('Are you sure you?')){
+                return true;
+            }
+            ev.preventDefault();
+            return false;
+        }
+    </script>
+    <footer class="bg-light w-100 text-center position-fixed pt-3">
+        <small>Powered by <a href="https://www.google.com/search?q=zapravo prevara" target="_blank">Nije prevara d.o.o.</a></small>
+    </footer>
+
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
-    
   </body>
 </html>

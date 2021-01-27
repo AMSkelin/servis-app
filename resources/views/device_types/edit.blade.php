@@ -9,6 +9,9 @@
         @csrf
         @method('PUT')
 
+        
+      
+       
         <!--  name -->
         <div class="form-group">
             <label for="name">Device type name</label>

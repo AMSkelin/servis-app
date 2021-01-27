@@ -20,9 +20,9 @@ class CreateRepairsTable extends Migration
             $table->mediumText('note');
             $table->date('repaired_at');
 
-            $table->foreignId('devices_id')->constrained();
-            $table->foreignId('bills_id')->constrained();
-            $table->foreignId('parts_id')->constrained();
+            $table->foreignId('device_id')->constrained();
+            $table->foreignId('bill_id')->constrained();
+            $table->foreignId('part_id')->constrained();
             
             
         });

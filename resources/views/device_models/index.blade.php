@@ -19,7 +19,7 @@
           <tr>
               <td>{{ $device_model->id }}</td>
               <td>{{ $device_model->name }}</td>
-              <td>{{ $device_model->device_type->name }}</td>
+              <td>{{ $device_model->device_type->name}}</td>
               
               <td>
                 <a class="btn btn-outline-primary" href="{{ route('device_models.show', ['device_model' => $device_model->id]) }}">Details</a>
